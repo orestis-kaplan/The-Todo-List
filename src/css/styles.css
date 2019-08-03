@@ -8,6 +8,11 @@ html,body{
   display: flex;
   height: 100%;
 }
+.project-title{
+  text-align: center;
+  font-size: 32px;
+  border-bottom: 1px solid black;
+}
 .plus-button{
   background-color: lightgrey;
   cursor: pointer;
@@ -41,10 +46,26 @@ html,body{
 }
 .project{
   font-size: 25px;
+  margin: 3px;
   padding: 10px;
   text-align: center;
+  word-break: break-all;
 }
 /* todos */
+.cancel-button{
+  padding: 3px 25px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  margin: 3px 0;
+  font-size: 16px;
+  background: #ff3434;
+}
+.todo-modal-buttons{
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
+}
 .todo-container{
   flex-basis: 80%;
   border-right: 2px solid #928d8da1;
@@ -54,6 +75,7 @@ html,body{
 .project-todo{
   flex-basis: 80%;
   overflow-y: auto;
+  display: none;
 }
 .todo-categories{
   display: flex;
@@ -69,7 +91,7 @@ html,body{
 .todo-modal{
   background-color: blueviolet;
   display: flex;
-  width: 500px;
+  width: 300px;
   border: 1px solid #6466ff;
   height: 200px;
   flex-direction: column;
@@ -79,18 +101,18 @@ html,body{
   right: 0;
   left: 0;
   bottom: 0;
-  padding: 24px;
+  padding: 24px 24px 0 24px;
   text-align: -webkit-center;
   margin: auto;
 }
 .submit-todo{
-  padding: 10px;
   background-color: #3cdc3c;
+  padding: 3px 25px;
   outline: none;
   border: none;
+  border-radius: 4px;
   margin: 3px 0;
-  width: 120px;
-  font-size: 20px;
+  font-size: 16px;
 }
 .todo-description-input{
   flex: 2;

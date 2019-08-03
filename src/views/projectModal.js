@@ -1,8 +1,21 @@
 /*jshint esversion: 6 */
 import Container from '../components/container.js';
 import Project from '../components/project.js';
+import {saveContainer,getProjects,removeProject,saveCurrentProject} from '../localStorage.js';
+import color from './colours.js';
 
 let projectsContainer = new Container([]);
+let currentProject = new Project("default",color.getRandomColor());
+
+  if(getProjects() != null){
+    projectsContainer = getProjects();
+    Object.setPrototypeOf(projectsContainer,Container.prototype);
+  }
+  else {
+    projectsContainer.addProject(currentProject);
+    saveContainer(projectsContainer);
+    saveCurrentProject(currentProject);
+  }
 
 const projectModal =(()=>{
   const render=()=>{
@@ -21,37 +34,22 @@ const projectModal =(()=>{
   };
 
   function saveProjectListener(modal,input){
-    let container = document.getElementById('projectsContainer');
     input.addEventListener('keyup',(e)=>{
       if(e.keyCode == 13){
-        let newProject = new Project(input.value);
+        let newProject = new Project(input.value,color.getRandomColor());
+        currentProject = newProject;
         let newProjectDiv = newProject.render();
         projectsContainer.addProject(newProject);
+        saveContainer(projectsContainer);
         projectsContainer.update(newProjectDiv);
         input.value = "";
         modal.style.display = "none";
         newProject.initTodoList();
-        showProject(newProject);
+        newProject.showSavedTodos();
       }
     });
-  }
-
-  function showProject(project){
-    project = JSON.parse(localStorage.getItem("project-"+project.id));
-    let todosOfProject = document.getElementById('project-' + project.id + '-todos');
-      projectsContainer.projects.forEach((pro)=>{
-        let proDiv = document.getElementById('project-' + pro.id + '-todos');
-        if(project.id == pro.id){
-          todosOfProject.style.display = "block";
-        }
-        else {
-          proDiv.style.display = "none";
-          todosOfProject.style.display = "block";
-        }
-      });
-
   }
   return{render: render};
 })();
 
-export {projectModal,projectsContainer};
+export {projectModal,projectsContainer,currentProject};

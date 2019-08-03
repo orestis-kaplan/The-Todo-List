@@ -1,5 +1,9 @@
 /*jshint esversion: 6 */
 import todoModal from '../views/todoModal.js';
+import {saveContainer,getProjects,removeProject} from '../localStorage.js';
+import Project from './project.js';
+import buttons from '../views/buttons.js';
+
 
 class Container{
   constructor(projects){
@@ -26,6 +30,10 @@ class Container{
      projectContainer.id = "projectsContainer";
      projectContainer.className = "projectsContainer";
 
+     let projectContainerTitle = document.createElement('div');
+     projectContainerTitle.className = 'project-title';
+     projectContainerTitle.innerText = 'Projects';
+
      let todoContainer = document.createElement('div');
      todoContainer.id = "todosContainer";
      todoContainer.className = "todo-container";
@@ -51,15 +59,26 @@ class Container{
 
      todoContainer.appendChild(todoCategories);
 
+     projectContainer.appendChild(projectContainerTitle);
      container.appendChild(projectContainer);
      container.appendChild(todoContainer);
 
      document.body.appendChild(container);
+
+     if(getProjects() != null){
+       let projects = getProjects().projects;
+       projects.forEach((project)=>{
+         Object.setPrototypeOf(project,Project.prototype);
+         this.update(project.render());
+       });
+     }
  }
 
   update(project){
     let container = document.getElementById('projectsContainer');
-    container.prepend(project);
+    let button = document.getElementById('plusButton');
+    container.insertBefore(project,button);
+    saveContainer(this);
   }
 
 }

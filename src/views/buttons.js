@@ -11,7 +11,7 @@ const buttons = (() => {
      button.id = 'todo-button';
      button.innerText = 'New Todo';
      button.addEventListener('click', () => {
-      modal.style.visibility = "visible";
+      modal.style.display = "flex";
      });
      container.prepend(button);
    }
@@ -29,10 +29,24 @@ const buttons = (() => {
    });
    container.appendChild(button);
  };
-
+  const addCancelButton = ()=>{
+    let modal = document.getElementById('todo-modal');
+    let modalButtons = document.getElementById('todo-modal-buttons');
+    let button = document.createElement('button');
+    if (!button.id) {
+      button.className = "cancel-button";
+      button.id = 'cancel-button';
+      button.innerText = 'Cancel';
+      button.addEventListener('click', () => {
+       modal.style.display = "none";
+      });
+      modalButtons.appendChild(button);
+    }
+  };
   return {
     addTodoButton: addTodoButton,
-    addProjectButton: addProjectButton
+    addProjectButton: addProjectButton,
+    addCancelButton: addCancelButton
   };
 })();
 

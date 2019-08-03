@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
-class Todo{
-  constructor(title,description,priority,completed=false){
+class Todo {
+  constructor(title, description, priority, completed = false) {
     this.title = title;
     this.description = description;
     //this.dueDate = dueDate;
@@ -8,8 +8,7 @@ class Todo{
     this.completed = completed;
   }
 
-  appendTodo(){
-
+  appendTodo() {
     let todoDiv = document.createElement('div');
     todoDiv.className = 'todo';
 
