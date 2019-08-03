@@ -1,0 +1,135 @@
+html,body{
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  overflow-y: hidden;
+}
+.container{
+  display: flex;
+  height: 100%;
+}
+.plus-button{
+  background-color: lightgrey;
+  cursor: pointer;
+  font-size: 33px;
+  margin: 6px auto;
+  text-align: center;
+  width: 40px;
+}
+.modal{
+  background-color: #69696985;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  top: 0;
+  text-align: center;
+}
+.add-project-input{
+  font-size: 27px;
+  width: 500px;
+  text-align: center;
+  position: relative;
+  top: 2em;
+}
+.projectsContainer{
+  background-color: white;
+  border: 1px solid white;
+  flex-basis: 20%;
+  height: 100%;
+  overflow-y: auto;
+}
+.project{
+  font-size: 25px;
+  padding: 10px;
+  text-align: center;
+}
+/* todos */
+.todo-container{
+  flex-basis: 80%;
+  border-right: 2px solid #928d8da1;
+  border-left: 2px solid #928d8da1;
+  overflow-y: auto;
+}
+.project-todo{
+  flex-basis: 80%;
+  overflow-y: auto;
+}
+.todo-categories{
+  display: flex;
+  justify-content: space-around;
+  padding-right: 52px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid black;
+}
+.todo-categories > div{
+  flex-basis: 5.5%;
+  text-align: center;
+}
+.todo-modal{
+  background-color: blueviolet;
+  display: flex;
+  width: 500px;
+  border: 1px solid #6466ff;
+  height: 200px;
+  flex-direction: column;
+  position: absolute;
+  box-shadow: 3px 4px #6466ff;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 24px;
+  text-align: -webkit-center;
+  margin: auto;
+}
+.submit-todo{
+  padding: 10px;
+  background-color: #3cdc3c;
+  outline: none;
+  border: none;
+  margin: 3px 0;
+  width: 120px;
+  font-size: 20px;
+}
+.todo-description-input{
+  flex: 2;
+  margin: 3px 0;
+}
+.todo-button{
+  width: fit-content;
+  margin: 10px auto;
+  border: 1px solid black;
+  padding: 7px 19px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.todo{
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 1px solid black;
+  padding: 13px 0;
+  width: 100%;
+}
+.todo > div:not(.remove-todo){
+  flex-basis: 20%;
+  word-break: break-word;
+  text-align: center;
+  margin: auto;
+}
+.remove-todo{
+  height: 16px;
+  width: 16px;
+  text-align: center;
+  background: red;
+  border-radius: 31px;
+  cursor: pointer;
+  margin: auto;
+}
+.remove-span:before{
+  content: '-';
+  font-size: 36px;
+  position: relative;
+  top: -16px;
+  color: white;
+}
