@@ -1,6 +1,8 @@
 /*jshint esversion: 6 */
+import {getProjects,updateContainer} from '../localStorage.js';
+
 class Todo {
-  constructor(title, description, priority, completed = false) {
+  constructor(title, description, priority, completed=false ) {
     this.title = title;
     this.description = description;
     //this.dueDate = dueDate;
@@ -8,7 +10,8 @@ class Todo {
     this.completed = completed;
   }
 
-  appendTodo() {
+
+  appendTodo(currentProject) {
     let todoDiv = document.createElement('div');
     todoDiv.className = 'todo';
 
@@ -28,10 +31,24 @@ class Todo {
     let completed = document.createElement('div');
     completed.className = 'todo-completed';
     completed.innerText = this.completed;
+    completed.addEventListener('click',()=>{
+      currentProject.todos.forEach((element)=>{
+        if(element.name == this.name){
+          element.completed = true;
+          completed.innerText = "true";
+        }
+      });
+      updateContainer(currentProject);
+    });
 
     let removeButton = document.createElement('div');
     removeButton.className = "remove-todo";
     removeButton.innerHTML = '<span class="remove-span"></span>';
+    removeButton.addEventListener('click',()=>{
+      todoDiv.remove();
+      currentProject.removeTodo(this);
+      updateContainer(currentProject);
+    });
 
     todoDiv.addEventListener('mouseover',()=>{
       todoDiv.style.boxShadow= '1px 1px 7px #2aa7e8 inset';

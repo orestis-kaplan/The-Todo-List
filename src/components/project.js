@@ -24,9 +24,11 @@ class Project {
     this.todos.push(todos);
   }
 
-  removeTodo(todos) {
-    var index = this.todos.indexOf(todos);
-
+  removeTodo(todo) {
+    var index = this.todos.forEach((element,index)=>{
+      if(element.name == todo.name)
+        return index;
+    });
     if (index != -1) {
       this.todos.splice(index, 1);
     }
@@ -56,7 +58,7 @@ class Project {
     newProjectDiv.style.background = this.color;
 
     newProjectDiv.addEventListener('mouseover',()=>{
-      newProjectDiv.style.boxShadow= '1px 1px 10px #2aa7e8';
+      newProjectDiv.style.boxShadow= '1px 1px 10px white';
     });
 
     newProjectDiv.addEventListener('mouseout',()=>{
@@ -76,7 +78,7 @@ class Project {
                 element.todos.forEach((todo) => {
                   console.log(todo);
                   Object.setPrototypeOf(todo, Todo.prototype);
-                  projectTodos.appendChild(todo.appendTodo());
+                  projectTodos.appendChild(todo.appendTodo(currentProject));
                 });
               }
           }

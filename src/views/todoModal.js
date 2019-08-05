@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 import Todo from '../components/todo.js';
 import Project from '../components/project.js';
-import {saveContainer,getProjects,removeProject,saveCurrentProject} from '../localStorage.js';
+import {getProjects,updateContainer} from '../localStorage.js';
 
 import {
   projectsContainer,
@@ -53,9 +53,9 @@ const todoModal = (() => {
     submit.addEventListener('click',()=>{
       let newTodo = new Todo(title.value,description.value,
         priority.options[priority.selectedIndex].value);
-      let todoDiv = newTodo.appendTodo();
       let currentProject = JSON.parse(localStorage.getItem("currentProject"));
       Object.setPrototypeOf(currentProject,Project.prototype);
+      let todoDiv = newTodo.appendTodo(currentProject);
       currentProject.addTodo(newTodo);
       updateContainer(currentProject);
       showSavedTodos(currentProject);
@@ -68,16 +68,6 @@ const todoModal = (() => {
     description.value = "";
     priority.options[priority.selectedIndex].value = "Low";
     modal.style.display = "none";
-  }
-
-  function updateContainer(currentProject){
-    projectsContainer.projects.forEach((element)=>{
-      if (element.name == currentProject.name) {
-        element.todos = currentProject.todos;
-      }
-    });
-    saveCurrentProject(currentProject);
-    saveContainer(projectsContainer);
   }
 
   function priorityDropdown(levels, priority, colors) {
@@ -98,9 +88,8 @@ const todoModal = (() => {
           if (projectTodos) {
             projectTodos.style.display = "block";
             element.todos.forEach((todo) => {
-              console.log(todo);
               Object.setPrototypeOf(todo, Todo.prototype);
-              projectTodos.appendChild(todo.appendTodo());
+              projectTodos.appendChild(todo.appendTodo(currentProject));
             });
           }
       }
