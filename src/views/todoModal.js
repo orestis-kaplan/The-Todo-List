@@ -5,7 +5,7 @@ import {saveContainer,getProjects,removeProject,saveCurrentProject} from '../loc
 
 import {
   projectsContainer,
-  projectModal,
+  projectModal
 } from './projectModal.js';
 
 const todoModal = (() => {
@@ -58,9 +58,7 @@ const todoModal = (() => {
       Object.setPrototypeOf(currentProject,Project.prototype);
       currentProject.addTodo(newTodo);
       updateContainer(currentProject);
-      currentProject.initTodoList();
-      currentProject.update(todoDiv);
-      currentProject.showSavedTodos();
+      showSavedTodos(currentProject);
       resetTodoModal(modal,title,description,priority);
     });
   }
@@ -91,8 +89,27 @@ const todoModal = (() => {
     });
   }
 
+  function showSavedTodos(currentProject) {
+    let projectsContainer = getProjects().projects;
+    projectsContainer.forEach((element) => {
+      let projectTodos = document.getElementById('project-todos');
+      if(element.name == currentProject.name){
+        projectTodos.innerHTML = "";
+          if (projectTodos) {
+            projectTodos.style.display = "block";
+            element.todos.forEach((todo) => {
+              console.log(todo);
+              Object.setPrototypeOf(todo, Todo.prototype);
+              projectTodos.appendChild(todo.appendTodo());
+            });
+          }
+      }
+    });
+  }
+
   return {
-    render: render
+    render: render,
+    showSavedTodos: showSavedTodos
   };
 
 })();

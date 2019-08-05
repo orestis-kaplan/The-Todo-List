@@ -30,6 +30,10 @@ class Container{
      projectContainer.id = "projectsContainer";
      projectContainer.className = "projectsContainer";
 
+     let siteName = document.createElement('div');
+     siteName.className = 'site-name';
+     siteName.innerText = 'My Todo List';
+
      let projectContainerTitle = document.createElement('div');
      projectContainerTitle.className = 'project-title';
      projectContainerTitle.innerText = 'Projects';
@@ -59,6 +63,7 @@ class Container{
 
      todoContainer.appendChild(todoCategories);
 
+     projectContainer.appendChild(siteName);
      projectContainer.appendChild(projectContainerTitle);
      container.appendChild(projectContainer);
      container.appendChild(todoContainer);

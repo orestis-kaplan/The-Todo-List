@@ -8,6 +8,12 @@ html,body{
   display: flex;
   height: 100%;
 }
+.site-name{
+  padding: 20px 0;
+  width: fit-content;
+  font-size: 35px;
+  margin: auto;
+}
 .project-title{
   text-align: center;
   font-size: 32px;
@@ -15,6 +21,7 @@ html,body{
 }
 .plus-button{
   background-color: lightgrey;
+  border-radius: 13px;
   cursor: pointer;
   font-size: 33px;
   margin: 6px auto;
@@ -45,6 +52,7 @@ html,body{
   overflow-y: auto;
 }
 .project{
+  border-radius: 9px;
   font-size: 25px;
   margin: 3px;
   padding: 10px;
@@ -80,7 +88,7 @@ html,body{
 .todo-categories{
   display: flex;
   justify-content: space-around;
-  padding-right: 52px;
+  padding-right: 86px;
   padding-bottom: 8px;
   border-bottom: 2px solid black;
 }
@@ -129,15 +137,15 @@ html,body{
 .todo{
   display: flex;
   justify-content: space-evenly;
-  border-bottom: 1px solid black;
-  padding: 13px 0;
+  border-bottom: 1px solid #d8d8d8;
   width: 100%;
 }
 .todo > div:not(.remove-todo){
   flex-basis: 20%;
   word-break: break-word;
   text-align: center;
-  margin: auto;
+  padding: 18px;
+  border-right: 1px solid black;
 }
 .remove-todo{
   height: 16px;

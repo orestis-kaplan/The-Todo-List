@@ -1,5 +1,9 @@
 /*jshint esversion: 6 */
-import {saveProject,getProjects,removeProject} from '../localStorage.js';
+import {
+  saveProject,
+  getProjects,
+  removeProject
+} from '../localStorage.js';
 import Todo from './todo.js';
 
 if (!localStorage.getItem("projectId")) {
@@ -33,9 +37,9 @@ class Project {
   }
 
   initTodoList() {
-    if (!document.getElementById('project-' + this.id + '-todos')) {
+    if (!document.getElementById('project-todos')) {
       let projectDiv = document.createElement('div');
-      projectDiv.id = 'project-' + this.id + '-todos';
+      projectDiv.id = 'project-todos';
       projectDiv.className = 'project-todo';
       let todoContainer = document.getElementById('todosContainer');
       todoContainer.appendChild(projectDiv);
@@ -50,37 +54,41 @@ class Project {
     newProjectDiv.id = 'project-' + this.id;
     newProjectDiv.className = 'project';
     newProjectDiv.style.background = this.color;
-    newProjectDiv.addEventListener('click', () => {
-      localStorage.setItem("currentProject",JSON.stringify(currentProject));
+
+    newProjectDiv.addEventListener('mouseover',()=>{
+      newProjectDiv.style.boxShadow= '1px 1px 10px #2aa7e8';
     });
 
+    newProjectDiv.addEventListener('mouseout',()=>{
+      newProjectDiv.style.boxShadow= 'none';
+    });
+
+    newProjectDiv.addEventListener('click', () => {
+        localStorage.setItem("currentProject", JSON.stringify(currentProject));
+        let projectsContainer = getProjects().projects;
+        projectsContainer.forEach((element) => {
+          console.log(currentProject);
+          let projectTodos = document.getElementById('project-todos');
+          if(element.name == currentProject.name){
+              if (projectTodos) {
+                projectTodos.innerHTML = "";
+                projectTodos.style.display = "block";
+                element.todos.forEach((todo) => {
+                  console.log(todo);
+                  Object.setPrototypeOf(todo, Todo.prototype);
+                  projectTodos.appendChild(todo.appendTodo());
+                });
+              }
+          }
+        });
+    });
     return newProjectDiv;
   }
 
   update(todo) {
-    let project = document.getElementById('project-' + this.id + '-todos');
-    project.style.display = "block";
+    let project = document.getElementById('project-todos');
+    //project.style.display = "block";
     project.appendChild(todo);
-  }
-
-  showSavedTodos(){
-    let projectsContainer = getProjects().projects;
-    projectsContainer.forEach((element)=>{
-      let project = document.getElementById('project-' + element.id + '-todos');
-      if (project) {
-        if (element.name == this.name) {
-          project.style.display = "block";
-          element.todos.forEach((todo)=>{
-            Object.setPrototypeOf(todo,Todo.prototype);
-            project.appendChild(todo.appendTodo());
-          });
-        }
-        else{
-          project.style.display ="none";
-        }
-
-      }
-    });
   }
 }
 

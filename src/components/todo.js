@@ -33,6 +33,14 @@ class Todo {
     removeButton.className = "remove-todo";
     removeButton.innerHTML = '<span class="remove-span"></span>';
 
+    todoDiv.addEventListener('mouseover',()=>{
+      todoDiv.style.boxShadow= '1px 1px 7px #2aa7e8 inset';
+    });
+
+    todoDiv.addEventListener('mouseout',()=>{
+      todoDiv.style.boxShadow= 'none';
+    });
+
     titleDiv.appendChild(title);
     todoDiv.appendChild(priority);
     todoDiv.appendChild(titleDiv);

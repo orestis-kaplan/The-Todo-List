@@ -7,15 +7,15 @@ import color from './colours.js';
 let projectsContainer = new Container([]);
 let currentProject = new Project("default",color.getRandomColor());
 
-  if(getProjects() != null){
-    projectsContainer = getProjects();
-    Object.setPrototypeOf(projectsContainer,Container.prototype);
-  }
-  else {
-    projectsContainer.addProject(currentProject);
-    saveContainer(projectsContainer);
-    saveCurrentProject(currentProject);
-  }
+if(getProjects() != null){
+  projectsContainer = getProjects();
+  Object.setPrototypeOf(projectsContainer,Container.prototype);
+}
+else {
+  projectsContainer.addProject(currentProject);
+  saveContainer(projectsContainer);
+  saveCurrentProject(currentProject);
+}
 
 const projectModal =(()=>{
   const render=()=>{
@@ -37,18 +37,18 @@ const projectModal =(()=>{
     input.addEventListener('keyup',(e)=>{
       if(e.keyCode == 13){
         let newProject = new Project(input.value,color.getRandomColor());
-        currentProject = newProject;
+        saveCurrentProject(newProject);
+        newProject.initTodoList();
         let newProjectDiv = newProject.render();
         projectsContainer.addProject(newProject);
         saveContainer(projectsContainer);
         projectsContainer.update(newProjectDiv);
         input.value = "";
         modal.style.display = "none";
-        newProject.initTodoList();
-        newProject.showSavedTodos();
       }
     });
   }
+
   return{render: render};
 })();
 
