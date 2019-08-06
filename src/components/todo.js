@@ -1,18 +1,27 @@
 /*jshint esversion: 6 */
 import {getProjects,updateContainer} from '../localStorage.js';
+import { compareAsc, format } from 'date-fns';
+import {updateTodoModalHandler} from '../views/todoUpdate.js';
+
+if (!localStorage.getItem("todoId")) {
+  localStorage.setItem("todoId", 0);
+}
 
 class Todo {
-  constructor(title, description, priority, completed=false ) {
+  constructor(title, description, priority,dueDate,completed=false) {
     this.title = title;
     this.description = description;
-    //this.dueDate = dueDate;
     this.priority = priority;
+    this.dueDate = format(new Date(dueDate),'DD/MM/YYYY');
     this.completed = completed;
+    this.id = JSON.parse(localStorage.getItem("todoId"));
+    localStorage.todoId++;
   }
 
 
   appendTodo(currentProject) {
     let todoDiv = document.createElement('div');
+    todoDiv.id = 'todo-'+this.id;
     todoDiv.className = 'todo';
 
     let titleDiv = document.createElement('div');
@@ -28,6 +37,10 @@ class Todo {
     priority.className = 'todo-priority';
     priority.innerText = this.priority;
 
+    let dueDate = document.createElement('div');
+    dueDate.className = 'todo-dueDate';
+    dueDate.innerText = this.dueDate;
+
     let completed = document.createElement('div');
     completed.className = 'todo-completed';
     completed.innerText = this.completed;
@@ -40,6 +53,10 @@ class Todo {
       });
       updateContainer(currentProject);
     });
+
+    let editButton = document.createElement('div');
+    editButton.id = 'edit-button';
+    editButton.innerText = 'Edit';
 
     let removeButton = document.createElement('div');
     removeButton.className = "remove-todo";
@@ -59,13 +76,25 @@ class Todo {
     });
 
     titleDiv.appendChild(title);
+    todoDiv.appendChild(editButton);
     todoDiv.appendChild(priority);
     todoDiv.appendChild(titleDiv);
     todoDiv.appendChild(description);
+    todoDiv.appendChild(dueDate);
     todoDiv.appendChild(completed);
     todoDiv.appendChild(removeButton);
+
+    editButton.addEventListener('click',()=>{
+      if (!localStorage.getItem("currentTodo")) {
+        localStorage.setItem("currentTodo", JSON.stringify(this));
+      }
+      localStorage.setItem("currentTodo", JSON.stringify(this));
+      updateTodoModalHandler();
+
+    });
 
     return todoDiv;
   }
 }
+
 export default Todo;

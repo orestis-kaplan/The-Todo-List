@@ -57,6 +57,10 @@ class Container{
      descriptionCategory.innerText = 'Description';
      todoCategories.appendChild(descriptionCategory);
 
+     let dueDateCategory = document.createElement('div');
+     dueDateCategory.innerText = 'Due Date';
+     todoCategories.appendChild(dueDateCategory);
+
      let completedCategory = document.createElement('div');
      completedCategory.innerText = 'Completed';
      todoCategories.appendChild(completedCategory);

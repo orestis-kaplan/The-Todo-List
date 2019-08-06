@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+import {projectModal} from './modals.js';
 import Container from '../components/container.js';
 import Project from '../components/project.js';
 import {saveContainer,getProjects,removeProject,saveCurrentProject} from '../localStorage.js';
@@ -17,23 +18,15 @@ else {
   saveCurrentProject(currentProject);
 }
 
-const projectModal =(()=>{
+const projectModalHandler =(()=>{
   const render=()=>{
-    let modal = document.createElement('div');
-    modal.id = 'projectModal';
-    modal.className = 'modal';
-
-    let input = document.createElement('input');
-    input.id = 'addProjectId';
-    input.className = 'add-project-input';
-    input.placeholder = "Enter a project name";
-    modal.style.display = "none";
-    modal.appendChild(input);
-    document.body.appendChild(modal);
-    saveProjectListener(modal,input);
+    projectModal();
+    saveProjectListener();
   };
 
-  function saveProjectListener(modal,input){
+  function saveProjectListener(){
+    let modal = document.getElementById('projectModal');
+    let input = document.getElementById('addProjectId');
     input.addEventListener('keyup',(e)=>{
       if(e.keyCode == 13){
         let newProject = new Project(input.value,color.getRandomColor());
@@ -52,4 +45,4 @@ const projectModal =(()=>{
   return{render: render};
 })();
 
-export {projectModal,projectsContainer,currentProject};
+export {projectModalHandler,projectsContainer,currentProject};

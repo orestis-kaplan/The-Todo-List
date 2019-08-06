@@ -1,82 +1,46 @@
 /*jshint esversion: 6 */
+import {todoModal} from './modals.js';
 import Todo from '../components/todo.js';
 import Project from '../components/project.js';
 import {getProjects,updateContainer} from '../localStorage.js';
 
 import {
   projectsContainer,
-  projectModal
+  projectModalHandler
 } from './projectModal.js';
 
-const todoModal = (() => {
-  const render = function(project) {
-    let modal = document.createElement('div');
-    modal.id = 'todo-modal';
-    modal.className = 'todo-modal';
-
-    let modalButtons = document.createElement('div');
-    modalButtons.id = 'todo-modal-buttons';
-    modalButtons.className = 'todo-modal-buttons';
-
-    let title = document.createElement('input');
-    title.id = 'todo-title-input';
-    title.className = 'todo-title-input';
-    title.placeholder = 'Enter Title';
-
-    let description = document.createElement('textarea');
-    description.id = 'todo-description-input';
-    description.className = 'todo-description-input';
-    description.placeholder = 'Enter description';
-
-    let priority = document.createElement('select');
-    priority.id = 'priority';
-    priorityDropdown(['Low', 'Medium', 'High'], priority, ['red', 'orange', 'pink']);
-
-    let submit = document.createElement('button');
-    submit.id = 'submit-todo';
-    submit.className = 'submit-todo';
-    submit.innerText = 'Save';
-
-    modal.style.display = "none";
-    modal.appendChild(title);
-    modal.appendChild(description);
-    modal.appendChild(priority);
-    modalButtons.appendChild(submit);
-    modal.appendChild(modalButtons);
-
-    document.body.appendChild(modal);
-
-    modalHandler(modal,title,description,priority,submit);
+const todoModalHandler = (() => {
+  const render = function() {
+    modalHandler(todoModal());
   };
 
-  function modalHandler(modal,title,description,priority,submit){
+  function modalHandler(params){
+    let modal = params.modal;
+    let submit = params.submit;
+    let title = params.title;
+    let priority = params.priority;
+    let description = params.description;
+    let dueDate = params.dueDate;
+
     submit.addEventListener('click',()=>{
       let newTodo = new Todo(title.value,description.value,
-        priority.options[priority.selectedIndex].value);
+        priority.options[priority.selectedIndex].value,dueDate.value);
       let currentProject = JSON.parse(localStorage.getItem("currentProject"));
       Object.setPrototypeOf(currentProject,Project.prototype);
       let todoDiv = newTodo.appendTodo(currentProject);
       currentProject.addTodo(newTodo);
       updateContainer(currentProject);
       showSavedTodos(currentProject);
-      resetTodoModal(modal,title,description,priority);
+      resetTodoModal(modal,title,description,priority,dueDate);
     });
   }
 
-  function resetTodoModal(modal,title,description,priority){
+  function resetTodoModal(modal,title,description,priority,dueDate){
     title.value = "";
     description.value = "";
     priority.options[priority.selectedIndex].value = "Low";
+    dueDate.value = "";
     modal.style.display = "none";
-  }
-
-  function priorityDropdown(levels, priority, colors) {
-    levels.forEach((level, index) => {
-      let option = document.createElement('option');
-      option.value = level;
-      option.innerText = level;
-      priority.appendChild(option);
-    });
   }
 
   function showSavedTodos(currentProject) {
@@ -104,7 +68,7 @@ const todoModal = (() => {
 })();
 
 export {
-  todoModal,
-  projectModal,
+  todoModalHandler,
+  projectModalHandler,
   projectsContainer
 };
