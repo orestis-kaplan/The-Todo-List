@@ -123,6 +123,7 @@ html,body{
   padding: 24px 24px 0 24px;
   text-align: -webkit-center;
   margin: auto;
+  z-index: 1;
 }
 .submit-todo{
   background-color: #3cdc3c;
