@@ -12,7 +12,6 @@ class Todo {
     this.title = title;
     this.description = description;
     this.priority = priority;
-    dueDate = format(new Date(dueDate),'DD/MM/YYYY');
     this.dueDate = dueDate;
     this.completed = completed;
     this.id = JSON.parse(localStorage.getItem("todoId"));
@@ -40,7 +39,7 @@ class Todo {
 
     let dueDate = document.createElement('div');
     dueDate.className = 'todo-dueDate';
-    dueDate.innerText = this.dueDate;
+    dueDate.innerText = format(new Date(this.dueDate),'DD/MM/YYYY');
 
     let completed = document.createElement('div');
     completed.id = "completed";

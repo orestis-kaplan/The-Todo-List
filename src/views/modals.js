@@ -79,11 +79,12 @@ const updateTodoModal = () => {
   let title = document.createElement('input');
   title.id = 'update-todo-title-input';
   title.className = 'todo-title-input';
-  title.placeholder = 'Enter Title';
+  title.required = true;
 
   let description = document.createElement('textarea');
   description.id = 'update-todo-description-input';
   description.className = 'todo-description-input';
+  description.required = true;
   description.placeholder = 'Enter description';
 
   let priority = document.createElement('select');
@@ -91,10 +92,10 @@ const updateTodoModal = () => {
   priorityDropdown(['Low', 'Medium', 'High'], priority, ['red', 'orange', 'pink']);
 
   let dueDate = document.createElement('input');
+  dueDate.required = true;
   dueDate.type = "date";
   dueDate.id = 'update-todo-dueDate-input';
   dueDate.className = 'update-todo-dueDate-input';
-  dueDate.placeholder = 'Enter due date';
 
   let submit = document.createElement('button');
   submit.id = 'update-submit-todo';

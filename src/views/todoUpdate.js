@@ -1,7 +1,6 @@
 /*jshint esversion: 6 */
 import Project from '../components/project.js';
 import Todo from '../components/todo.js';
-import {format} from 'date-fns';
 import {getProjects,saveContainer} from '../localStorage.js';
 
 function updateTodoModalHandler(){
@@ -19,16 +18,22 @@ function updateTodoModalHandler(){
   dueDate.value = thisTodo.dueDate;
   modal.style.display = "flex";
 
-  submit.addEventListener('click',()=>{
-    thisTodo.title = title.value;
-    thisTodo.description = description.value;
-    thisTodo.priority = priority.options[priority.selectedIndex].value;
-    thisTodo.dueDate = format(new Date(dueDate.value),'DD/MM/YYYY');
-    let currentProject = JSON.parse(localStorage.getItem("currentProject"));
-    Object.setPrototypeOf(currentProject,Project.prototype);
-    saveTodo(currentProject,thisTodo);
-    showSavedTodos(currentProject);
-    modal.style.display = "none";
+  submit.addEventListener('click',(e)=>{
+    if(!title.checkValidity() || !description.checkValidity() || !dueDate.checkValidity()){
+      e.preventDefault();
+      alert("Fill all fields");
+    }
+    else{
+      thisTodo.title = title.value;
+      thisTodo.description = description.value;
+      thisTodo.priority = priority.options[priority.selectedIndex].value;
+      thisTodo.dueDate = dueDate.value;
+      let currentProject = JSON.parse(localStorage.getItem("currentProject"));
+      Object.setPrototypeOf(currentProject,Project.prototype);
+      saveTodo(currentProject,thisTodo);
+      showSavedTodos(currentProject);
+      modal.style.display = "none";
+     }
   });
 }
 
