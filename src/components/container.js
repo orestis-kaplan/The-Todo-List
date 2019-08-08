@@ -1,9 +1,6 @@
 /*jshint esversion: 6 */
-import todoModal from '../views/todoModal.js';
-import {saveContainer,getProjects,removeProject} from '../localStorage.js';
+import {saveContainer,getProjects} from '../localStorage.js';
 import Project from './project.js';
-import buttons from '../views/buttons.js';
-
 
 class Container{
   constructor(projects){

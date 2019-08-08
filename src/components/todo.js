@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
-import {getProjects,updateContainer} from '../localStorage.js';
-import { compareAsc, format } from 'date-fns';
+import {updateContainer} from '../localStorage.js';
+import {format} from 'date-fns';
 import {updateTodoModalHandler} from '../views/todoUpdate.js';
 
 if (!localStorage.getItem("todoId")) {
@@ -12,7 +12,8 @@ class Todo {
     this.title = title;
     this.description = description;
     this.priority = priority;
-    this.dueDate = format(new Date(dueDate),'DD/MM/YYYY');
+    dueDate = format(new Date(dueDate),'DD/MM/YYYY');
+    this.dueDate = dueDate;
     this.completed = completed;
     this.id = JSON.parse(localStorage.getItem("todoId"));
     localStorage.todoId++;
@@ -42,6 +43,7 @@ class Todo {
     dueDate.innerText = this.dueDate;
 
     let completed = document.createElement('div');
+    completed.id = "completed";
     completed.className = 'todo-completed';
     completed.innerText = this.completed;
     completed.addEventListener('click',()=>{
@@ -84,13 +86,12 @@ class Todo {
     todoDiv.appendChild(completed);
     todoDiv.appendChild(removeButton);
 
-    editButton.addEventListener('click',()=>{
+    editButton.addEventListener('click',(event)=>{
       if (!localStorage.getItem("currentTodo")) {
         localStorage.setItem("currentTodo", JSON.stringify(this));
       }
       localStorage.setItem("currentTodo", JSON.stringify(this));
-      updateTodoModalHandler();
-
+        updateTodoModalHandler();
     });
 
     return todoDiv;

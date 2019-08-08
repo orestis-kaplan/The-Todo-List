@@ -1,14 +1,16 @@
-html,body{
+html, body {
   box-sizing: border-box;
   height: 100%;
   margin: 0;
   overflow-y: hidden;
 }
-.container{
+
+.container {
   display: flex;
   height: 100%;
 }
-.site-name{
+
+.site-name {
   color: white;
   font-family: fantasy;
   font-size: 35px;
@@ -16,12 +18,14 @@ html,body{
   text-align: center;
   width: 100%;
 }
-.project-title{
+
+.project-title {
   text-align: center;
   font-size: 32px;
   padding: 9.5px;
 }
-.plus-button{
+
+.plus-button {
   background-color: lightgrey;
   border-radius: 13px;
   cursor: pointer;
@@ -30,7 +34,8 @@ html,body{
   text-align: center;
   width: 40px;
 }
-.modal{
+
+.modal {
   background-color: #69696985;
   left: 0;
   right: 0;
@@ -39,14 +44,16 @@ html,body{
   top: 0;
   text-align: center;
 }
-.add-project-input{
+
+.add-project-input {
   font-size: 27px;
   width: 500px;
   text-align: center;
   position: relative;
   top: 2em;
 }
-.projectsContainer{
+
+.projectsContainer {
   animation: animateSiteName 2s ease infinite;
   background: linear-gradient(270deg, #246655, #bc1763);
   background-size: 400% 400%;
@@ -54,12 +61,22 @@ html,body{
   height: 100%;
   overflow-y: auto;
 }
+
 @keyframes animateSiteName {
-    0%{background-position:0 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0 50%}
+  0% {
+    background-position: 0 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0 50%
+  }
 }
-.project{
+
+.project {
   border-radius: 9px;
   font-size: 25px;
   margin: 3px;
@@ -67,8 +84,9 @@ html,body{
   text-align: center;
   word-break: break-all;
 }
+
 /* todos */
-.cancel-button{
+.cancel-button {
   padding: 3px 25px;
   outline: none;
   border: none;
@@ -77,23 +95,27 @@ html,body{
   font-size: 16px;
   background: #ff3434;
 }
-.todo-modal-buttons{
+
+.todo-modal-buttons {
   display: flex;
   justify-content: space-evenly;
   padding: 10px;
 }
-.todo-container{
+
+.todo-container {
   flex-basis: 80%;
   border-right: 2px solid #928d8da1;
   border-left: 2px solid #928d8da1;
   overflow-y: auto;
 }
-.project-todo{
+
+.project-todo {
   flex-basis: 80%;
   overflow-y: auto;
   display: none;
 }
-.todo-categories{
+
+.todo-categories {
   display: flex;
   justify-content: space-around;
   padding-right: 101px;
@@ -101,13 +123,15 @@ html,body{
   padding-bottom: 3px;
   border-top-right-radius: 15% 54px;
 }
-.todo-categories > div{
+
+.todo-categories>div {
   text-align: center;
   width: 282px;
   background-color: bisque;
   padding: 7px 0;
 }
-.todo-modal{
+
+.todo-modal {
   background-color: blueviolet;
   display: flex;
   width: 300px;
@@ -123,8 +147,10 @@ html,body{
   padding: 24px 24px 0 24px;
   text-align: -webkit-center;
   margin: auto;
+  z-index: 1;
 }
-.submit-todo{
+
+.submit-todo {
   background-color: #3cdc3c;
   padding: 3px 25px;
   outline: none;
@@ -134,11 +160,12 @@ html,body{
   font-size: 16px;
 }
 
-.todo-description-input{
+.todo-description-input {
   flex: 2;
   margin: 3px 0;
 }
-.todo-button{
+
+.todo-button {
   width: fit-content;
   margin: 10px auto;
   border: 1px solid black;
@@ -146,46 +173,55 @@ html,body{
   border-radius: 10px;
   cursor: pointer;
 }
-.todo-button:hover{
+
+.todo-button:hover {
   background-color: #a9a9a96b;
 }
-.todo{
+
+.todo {
   display: flex;
   justify-content: space-evenly;
   border-bottom: 1px solid #d8d8d8;
   width: 100%;
   position: relative;
 }
-#edit-button{
+
+#edit-button {
   background-color: cornflowerblue;
   border: 1px solid #ded0d0;
   border-radius: 0px 12px 12px 0;
   left: 0;
   float: left;
-  padding: 0px 13px;
+  padding: 0 13px;
   position: absolute;
   top: 30%;
+  cursor: pointer;
 }
-.todo > div:not(.remove-todo){
+
+.todo>div:not(.remove-todo) {
   flex-basis: 20%;
   word-break: break-word;
   text-align: center;
   padding: 18px;
   border-right: 1px solid black;
 }
-.todo-completed:hover{
+
+.todo-completed:hover {
   background-color: #10ea106b;
 }
-.remove-todo{
+#completed{
+  cursor: pointer;
+}
+.remove-todo {
+  cursor: pointer;
   height: 20px;
   width: 25px;
   text-align: center;
   background: red;
   border-radius: 31px;
-  cursor: pointer;
   margin: auto 41px;
 }
-.remove-span:before{
+.remove-span:before {
   content: '-';
   font-size: 36px;
   position: relative;

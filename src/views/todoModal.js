@@ -30,7 +30,7 @@ const todoModalHandler = (() => {
       let todoDiv = newTodo.appendTodo(currentProject);
       currentProject.addTodo(newTodo);
       updateContainer(currentProject);
-      showSavedTodos(currentProject);
+      showSavedTodos(currentProject);      
       resetTodoModal(modal,title,description,priority,dueDate);
     });
   }

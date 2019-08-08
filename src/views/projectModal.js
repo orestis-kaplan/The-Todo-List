@@ -2,7 +2,7 @@
 import {projectModal} from './modals.js';
 import Container from '../components/container.js';
 import Project from '../components/project.js';
-import {saveContainer,getProjects,removeProject,saveCurrentProject} from '../localStorage.js';
+import {saveContainer,getProjects,saveCurrentProject} from '../localStorage.js';
 import color from './colours.js';
 
 let projectsContainer = new Container([]);
@@ -42,7 +42,7 @@ const projectModalHandler =(()=>{
     });
   }
 
-  return{render: render};
+  return{render};
 })();
 
 export {projectModalHandler,projectsContainer,currentProject};

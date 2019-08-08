@@ -1,6 +1,5 @@
 /*jshint esversion: 6 */
 
-// project name listener
 const buttons = (() => {
   const addTodoButton = ()=>{
    let modal = document.getElementById('todo-modal');

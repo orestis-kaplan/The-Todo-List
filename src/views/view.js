@@ -1,10 +1,9 @@
 /*jshint esversion: 6 */
 import buttons from './buttons.js';
 import {projectsContainer,todoModalHandler,projectModalHandler} from './todoModal.js';
-import {saveContainer,getProjects,removeProject,saveCurrentProject} from '../localStorage.js';
+import {saveCurrentProject} from '../localStorage.js';
 import {updateTodoModal} from './modals.js';
 import Project from '../components/project.js';
-import Todo from '../components/todo.js';
 
 updateTodoModal();
 projectsContainer.initializeContainer();

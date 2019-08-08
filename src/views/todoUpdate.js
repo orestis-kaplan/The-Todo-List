@@ -1,32 +1,34 @@
 /*jshint esversion: 6 */
 import Project from '../components/project.js';
 import Todo from '../components/todo.js';
-import Container from '../components/container.js';
-
-import {getProjects,updateContainer,saveCurrentProject,saveContainer} from '../localStorage.js';
+import {format} from 'date-fns';
+import {getProjects,saveContainer} from '../localStorage.js';
 
 function updateTodoModalHandler(){
   let thisTodo = JSON.parse(localStorage.getItem("currentTodo"));
   Object.setPrototypeOf(thisTodo,Todo.prototype);
-
   let modal = document.getElementById('update-todo-modal');
   let submit = document.getElementById('update-submit-todo');
   let title = document.getElementById('update-todo-title-input');
+  title.value = thisTodo.title;
   let priority = document.getElementById('update-priority');
+  priority.value = thisTodo.priority;
   let description = document.getElementById('update-todo-description-input');
-  let dueDate =document.getElementById('update-todo-dueDate-input');
-
+  description.value = thisTodo.description;
+  let dueDate = document.getElementById('update-todo-dueDate-input');
+  dueDate.value = thisTodo.dueDate;
   modal.style.display = "flex";
+
   submit.addEventListener('click',()=>{
     thisTodo.title = title.value;
     thisTodo.description = description.value;
     thisTodo.priority = priority.options[priority.selectedIndex].value;
-    thisTodo.dueDate = dueDate.value;
+    thisTodo.dueDate = format(new Date(dueDate.value),'DD/MM/YYYY');
     let currentProject = JSON.parse(localStorage.getItem("currentProject"));
     Object.setPrototypeOf(currentProject,Project.prototype);
     saveTodo(currentProject,thisTodo);
-    resetTodoModal(modal,title,description,priority,dueDate);
     showSavedTodos(currentProject);
+    modal.style.display = "none";
   });
 }
 
@@ -47,8 +49,6 @@ function showSavedTodos(currentProject) {
       }
     }
   }
-
-  console.log(array);
   saveContainer(array);
 }
 
@@ -59,14 +59,6 @@ function saveTodo(currentProject,thisTodo){
       currentProject.todos[i] = thisTodo;
     }
   }
-}
-
-function resetTodoModal(modal,title,description,priority,dueDate){
-  title.value = "";
-  description.value = "";
-  priority.options[priority.selectedIndex].value = "Low";
-  dueDate.value = "";
-  modal.style.display = "none";
 }
 
 export {updateTodoModalHandler};
