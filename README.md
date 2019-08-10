@@ -1,15 +1,5 @@
-# 🚀 Welcome to your new awesome project!
+# 🚀 Welcome to my Todo List app!!! 
 
-This project has been created using **webpack scaffold**, you can now run
+Author: [Orestis Kaplanis](https://github.com/userman95)
 
-```
-npm run build
-```
-
-or
-
-```
-yarn build
-```
-
-to bundle your application
+Online preview: https://userman95.github.io/The-Todo-List/dist
