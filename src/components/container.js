@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-import {saveContainer,getProjects} from '../localStorage.js';
+import {getProjects} from '../localStorage.js';
 import Project from './project.js';
 
 class Container{
