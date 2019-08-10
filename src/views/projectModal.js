@@ -2,7 +2,7 @@
 import {projectModal} from './modals.js';
 import Container from '../components/container.js';
 import Project from '../components/project.js';
-import {saveContainer,getProjects,saveCurrentProject} from '../localStorage.js';
+import {saveContainer,getProjects,updateContainer,saveCurrentProject} from '../localStorage.js';
 import color from './colours.js';
 
 let projectsContainer = new Container([]);
@@ -30,11 +30,20 @@ const projectModalHandler =(()=>{
     input.addEventListener('keyup',(e)=>{
       if(e.keyCode == 13){
         let newProject = new Project(input.value,color.getRandomColor());
-        saveCurrentProject(newProject);
         newProject.initTodoList();
         let newProjectDiv = newProject.render();
-        projectsContainer.addProject(newProject);
+        if(getProjects() != null){
+          projectsContainer = getProjects();
+          Object.setPrototypeOf(projectsContainer,Container.prototype);
+          projectsContainer.addProject(newProject);
+        }
+        else {
+          projectsContainer.addProject(newProject);
+          updateContainer(newProject);
+        }
+        saveCurrentProject(newProject);
         saveContainer(projectsContainer);
+        updateContainer(newProject);
         projectsContainer.update(newProjectDiv);
         input.value = "";
         modal.style.display = "none";

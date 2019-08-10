@@ -46,7 +46,7 @@ class Project {
   }
 
   render() {
-    let currentProject = this;
+    let currentProject = {};
     let newProjectDiv = document.createElement('div');
     newProjectDiv.innerText = this.name;
     newProjectDiv.id = 'project-' + this.id;
@@ -61,10 +61,11 @@ class Project {
       newProjectDiv.style.boxShadow= 'none';
     });
 
-    newProjectDiv.addEventListener('click', () => {
-        localStorage.setItem("currentProject", JSON.stringify(currentProject));
-        let projectsContainer = getProjects().projects;
+    newProjectDiv.addEventListener('click', () => { 
+      let projectsContainer = getProjects().projects;
         projectsContainer.forEach((element) => {
+          if(this.id == element.id) currentProject = element;
+          localStorage.setItem("currentProject", JSON.stringify(currentProject));
           let projectTodos = document.getElementById('project-todos');
           if(element.name == currentProject.name){
             if (projectTodos) {

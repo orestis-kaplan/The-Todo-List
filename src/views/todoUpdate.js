@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 import Project from '../components/project.js';
 import Todo from '../components/todo.js';
-import {getProjects,saveContainer} from '../localStorage.js';
+import {getProjects,updateContainer,saveContainer} from '../localStorage.js';
 
 function updateTodoModalHandler(){
   let thisTodo = JSON.parse(localStorage.getItem("currentTodo"));
@@ -30,7 +30,7 @@ function updateTodoModalHandler(){
       thisTodo.dueDate = dueDate.value;
       let currentProject = JSON.parse(localStorage.getItem("currentProject"));
       Object.setPrototypeOf(currentProject,Project.prototype);
-      saveTodo(currentProject,thisTodo);
+      saveTodo(currentProject,thisTodo);      
       showSavedTodos(currentProject);
       modal.style.display = "none";
      }
@@ -42,7 +42,8 @@ function showSavedTodos(currentProject) {
   let array = projectsContainer;
   for (var i = 0; i < array.projects.length; i++) {
     let projectTodos = document.getElementById('project-todos');
-    if(array.projects[i].name == currentProject.name){
+    if(array.projects[i].name == currentProject.name){      
+      updateContainer(currentProject);
       array.projects[i].todos = currentProject.todos;
       projectTodos.innerHTML = "";
       if (projectTodos) {
@@ -51,10 +52,10 @@ function showSavedTodos(currentProject) {
           Object.setPrototypeOf(todo, Todo.prototype);
           projectTodos.appendChild(todo.appendTodo(currentProject));
         });
+        saveContainer(array);
       }
     }
   }
-  saveContainer(array);
 }
 
 function saveTodo(currentProject,thisTodo){

@@ -84,7 +84,6 @@ class Container{
     let container = document.getElementById('projectsContainer');
     let button = document.getElementById('plusButton');
     container.insertBefore(project,button);
-    saveContainer(this);
   }
 
 }
