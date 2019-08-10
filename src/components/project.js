@@ -67,14 +67,14 @@ class Project {
         projectsContainer.forEach((element) => {
           let projectTodos = document.getElementById('project-todos');
           if(element.name == currentProject.name){
-              if (projectTodos) {
-                projectTodos.innerHTML = "";
-                projectTodos.style.display = "block";
-                element.todos.forEach((todo) => {
-                  Object.setPrototypeOf(todo, Todo.prototype);
-                  projectTodos.appendChild(todo.appendTodo(currentProject));
-                });
-              }
+            if (projectTodos) {
+              projectTodos.innerHTML = "";
+              projectTodos.style.display = "block";
+              element.todos.forEach((todo) => {
+                Object.setPrototypeOf(todo, Todo.prototype);
+                projectTodos.appendChild(todo.appendTodo(currentProject));
+              });
+            }
           }
         });
     });
