@@ -47,3 +47,7 @@ Run `npm run start` and enjoy !
 ## Authors
 
 * **[Orestis Kaplanis](https://github.com/userman95)**
+
+## Screenshot
+
+![screenshot](https://github.com/userman95/The-Todo-List/blob/master/Screenshot%20(165).png)
