@@ -1,6 +1,13 @@
 # 🚀 Welcome to my Todo List app!!! 
 
-Author: [Orestis Kaplanis](https://github.com/userman95)
+This app is about a todo-list. The user can create a project that contains it's own todos. Each todo has the following fields
+
+* Priority
+* Title
+* Description
+* Due Date
+* Completed
+A todo can be added, removed and edited
 
 Online preview: https://userman95.github.io/The-Todo-List/dist
 
