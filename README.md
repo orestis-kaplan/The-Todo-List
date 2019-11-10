@@ -7,6 +7,7 @@ This app is about a todo-list. The user can create a project that contains it's 
 * Description
 * Due Date
 * Completed
+
 A todo can be added, removed and edited
 
 Online preview: https://userman95.github.io/The-Todo-List/dist
