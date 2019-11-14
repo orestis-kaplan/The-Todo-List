@@ -1,6 +1,6 @@
 # 🚀 Welcome to my Todo List app!!! 
 
-This app is about a todo-list. The user can create a project that contains it's own todos. Each todo has the following fields
+This app is about a todo-list that allows users to set priorities for different tasks. In our everyday lives we often want to categorize and prioritize out daily responsibilities. That being said, the user can create a project (container of responsibilities) that contains it's own todos. Each todo has the following fields: 
 
 * Priority
 * Title
@@ -9,8 +9,6 @@ This app is about a todo-list. The user can create a project that contains it's 
 * Completed
 
 A todo can be added, removed and edited
-
-Online preview: https://userman95.github.io/The-Todo-List/dist
 
 ## Screenshot
 
