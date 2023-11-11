@@ -7,7 +7,7 @@ This app is about a todo-list that allows users to set priorities for different 
 * Description
 * Due Date
 * Completed
-
+asdasd
 A todo can be added, removed and edited
 
 ## Screenshot
